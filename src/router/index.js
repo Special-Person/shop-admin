@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "../components/Login";
+import Login from "../views/Login";
 
 Vue.use(VueRouter);
 
@@ -10,7 +10,16 @@ const router = new VueRouter({
 	routes: [
 		{ path: "/", redirect: "/login" },
 		{ path: "/login", name: "Login", component: Login },
-		{ path: "/home", name: "Home", component: () => import( /* webpackChunkName: "Home"*/ "../components/Home") },
+		{
+			path: "/home",
+			name: "Home",
+			component: () => import( /* webpackChunkName: "Home"*/ "../views/Home/Home"),
+			redirect: "/welcome",
+			children: [
+				{ path: "/welcome", name: "Welcome", component: () => import ( /* webpackChunkName: "Welcome"*/ "../views/Home/Welcome") },
+				{ path: "/users", name: "Users", component: () => import ( /* webpackChunkName: "Users"*/ "../views/Users/Users") },
+			]
+		},
 	]
 });
 

@@ -8,10 +8,8 @@ let net = axios.create({
 });
 
 net.interceptors.request.use(config => {
-	let token = sessionStorage.getItem("token");
-	return {
-		...config
-	}
+	config.headers.Authorization = sessionStorage.getItem("token");
+	return config;
 });
 
 net.interceptors.response.use(res => res.data);

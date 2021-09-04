@@ -1,7 +1,21 @@
-import network from './request';
+import net from './request';
 
-export const apiLogin = data => network({
+/**
+ * username
+ * password
+ */
+export const apiLogin = data => net({
 	url: "/login",
 	data,
 	method: "post"
+})
+
+export const getHomeAsideMenu = () => net({
+	url: "/home_aside_menu",
+	method: "get"
+})
+
+export const getUsers = () => net({
+	url: "/users",
+	method: "get"
 })
